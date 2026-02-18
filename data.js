@@ -73,9 +73,9 @@ setInterval(() => {
   // =====================
   const diff = next.t - now;
 
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
+  const hh = Math.floor(diff / 3600000);
+  const mm = Math.floor((diff % 3600000) / 60000);
+  const ss = Math.floor((diff % 60000) / 1000);
 
   countdown.innerHTML = `
     <span style="color:red;font-weight:bold;">
@@ -95,6 +95,7 @@ setInterval(() => {
   }
 
 }, 1000)
+
 
 
 
