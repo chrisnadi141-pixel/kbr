@@ -82,8 +82,8 @@ setInterval(() => {
       ${next.nama.toUpperCase()}
     </span>
     : <span style="color:white;">
-      - ${hh}: ${mm}: ${ss}
-    </span>
+  - ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}
+</span>
   `;
 
   const nowHM =
@@ -95,6 +95,7 @@ setInterval(() => {
   }
 
 }, 1000)
+
 
 
 
