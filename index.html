@@ -48,7 +48,7 @@
 }
 
 #jamDigital{
-  font-size:clamp(5rem, 7vw, 6rem);
+  font-size:clamp(2.5rem, 5vw, 4rem);
   font-weight:900;
   margin-top:10px;
   text-align:center;
@@ -73,7 +73,6 @@
     0 0 12px rgba(0,0,0,0.8),
     0 0 20px rgba(0,255,255,0.4);
 }
-
 /* ALAMAT BERJALAN */
 #alamatWrapper{
   overflow:hidden;
@@ -108,11 +107,10 @@
   text-shadow:0 0 8px rgba(255,200,50,0.8);
 }
 
-
 /* HARI BESAR */
 #hariBesarBox{
-  display: none;
   background:rgba(0,0,0,.55);
+  display: none;
   padding:12px 14px;
   border-radius:12px;
   position: absolute;
@@ -125,8 +123,6 @@
   color:#ffd966;
   z-index: 10;
 }
-
-
 
 /* TABLE */
 table{
@@ -261,10 +257,10 @@ th,td{
 </div>
 
 <!-- ================= DATA SHOLAT ================= -->
-<script src="data.js"></script>
+<script src="script.js"></script>
 
 <script>
-/* UPDATE JADWAL DARI data.js */
+/* UPDATE JADWAL DARI script.js */
 const ids = ["imsak","subuh","dzuhur","ashar","maghrib","isya"];
 
 const updateJadwalHTML = () => {
@@ -326,22 +322,22 @@ const hijriMonths = [
   "Syawal","Dzulqaidah","Dzulhijjah"
 ];
 
-let today = new Date();
+const d = new Date();
+d.setDate(d.getDate() - 1);
+const fmt = new Intl.DateTimeFormat(
+  'id-ID-u-ca-islamic-umalqura',
+  { day:'numeric', month:'numeric', year:'numeric', weekday:'long' }
+);
 
+const parts = fmt.formatToParts(d);
+const day = parts.find(p=>p.type==='day').value;
+const month = parts.find(p=>p.type==='month').value;
+const year = parts.find(p=>p.type==='year').value;
+const weekday = parts.find(p=>p.type==='weekday').value;
 
-today.setDate(today.getDate() - 1);
-
-// format hijriyah
-let hijri = new Intl.DateTimeFormat("id-ID-u-ca-islamic-umalqura", {
-  day: "numeric",
-  month: "long",
-  year: "numeric"
-}).format(today);
-
-document.getElementById("hijriDisplay").innerHTML = hijri;
-
+document.getElementById("hijriDisplay").innerHTML =
+  `${day} ${hijriMonths[month-1]} ${year} H`;
 },1000)  
-  
 
 
 
@@ -421,11 +417,9 @@ function tampilkanAdzan(){
 
 setInterval(cekAdzan,1000);
 </script>
-
-
 </body>
-
 </html>
+
 
 
 
